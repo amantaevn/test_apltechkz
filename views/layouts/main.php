@@ -70,18 +70,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             NavBar::end();
             ?>
 </header>
-<!--<div class="dropdown text-end">
-    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-    </a>
-    <ul class="dropdown-menu text-small show" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 34.4444px);" data-popper-placement="bottom-start">
-        <li><a class="dropdown-item" href="http://test/basic/web/index.php?r=site%2Flogin">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-    </ul>
-</div>-->
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>

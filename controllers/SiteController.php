@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\EntryForm;
 use app\models\PasswordResetRequestForm;
+use app\models\Product;
 use app\models\ResetPasswordForm;
 use app\models\UploadForm;
 use Yii;
@@ -165,6 +166,14 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionProduct()
+    {
+        $model = new Product();
+
+        return $this->render('product');
+    }
+
 
     /**
      * Requests password reset.
