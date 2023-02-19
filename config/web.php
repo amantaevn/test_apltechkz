@@ -13,11 +13,10 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'vuxCiCYzK4Gfy5dhwWsaPx5EhlZy5PWr',
-            /*'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]*/
+            'parsers' => [
+                'application/json' => '\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -45,14 +44,24 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*'urlManager' => [
-            'enablePrettyUrl' => true,
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enableStrictParsing' => true,
             'showScriptName' => false,
-            'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+            'enablePrettyUrl' => true,
+            'rules' =>
+            [
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['product']],
+                'product/create' => 'product/create',
+                'product/update' => 'product/update',
+                'product/brand' => 'product/sort',
+                'product/delete' => 'product/delete',
+                'product' => 'product/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
-        ]*/
+        ],
     ],
     'params' => $params,
 ];

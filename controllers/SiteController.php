@@ -6,7 +6,6 @@ use app\models\EntryForm;
 use app\models\PasswordResetRequestForm;
 use app\models\Product;
 use app\models\ResetPasswordForm;
-use app\models\UploadForm;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
@@ -17,7 +16,6 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
-use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
