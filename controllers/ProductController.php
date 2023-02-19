@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\Product;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\rest\ActiveController;
 
 class ProductController extends ActiveController
@@ -18,14 +19,11 @@ class ProductController extends ActiveController
 
     public function actionIndex()
     {
-        $product = Product::find()->all();
-        if(count($product) > 0 )
-        {
-            return array('status' => true, 'data'=> $product);
-        }
-        else
-        {
-            return array('status'=>false,'data'=> 'Данные не найдены');
+        $products = Product::findProductTable();
+        if (count($products) > 0) {
+            return array('status' => true, 'data' => $products);
+        } else {
+            return array('status' => false, 'data' => 'Данные не найдены');
         }
     }
 
@@ -45,43 +43,42 @@ class ProductController extends ActiveController
     public function actionUpdate($id)
     {
         $product = Product::find()->where(['ID' => $id])->one();
-        if(count($product) > 0 )
-        {
+        if (count($product) > 0) {
             $product->attributes = \yii::$app->request->post();
             $product->save();
-            return array('status' => true, 'data'=> 'Product record is updated successfully');
+            return array('status' => true, 'data' => 'Product record is updated successfully');
         } else {
-            return array('status'=>false,'data'=> 'Product not Found');
+            return array('status' => false, 'data' => 'Product not Found');
         }
     }
 
     public function actionDelete($id)
     {
         $product = Product::find()->where(['ID' => $id])->one();
-        if(count($product) > 0 )
-        {
+        if (count($product) > 0) {
             $product->delete();
-            return array('status' => true, 'data'=> 'Product record is successfully deleted');
+            return array('status' => true, 'data' => 'Product record is successfully deleted');
         } else {
-            return array('status'=>false,'data'=> 'Product Not Found');
+            return array('status' => false, 'data' => 'Product Not Found');
         }
     }
 
-    public function actionSort(string $brand_name)
+    public function actionBrand()
     {
-        var_dump($brand_name);
-        $products = Product::find()->params(['brand_name' => $brand_name])->all();
-        return $products;
-        var_dump($products);
-        die();
-        /*foreach ($products as $product) {
-
-        }*/
+        $brand_name = Yii::$app->request->get('message');
+        $products = Product::findMaxAndMinPrice($brand_name);
+        if (count($products) > 0) {
+            return array('status' => true, 'data' => $products);
+        } else {
+            return array('status' => false, 'data' => 'Данные не найдены');
+        }
     }
 
     public function actions()
     {
-        return parent::actions();
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
     }
 
     public function checkAccess($action, $model = null, $params = [])
